@@ -2,3 +2,4 @@
 config.php
 *.p12
 zpd_db_backups
+*~

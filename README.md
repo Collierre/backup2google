@@ -21,13 +21,13 @@ Requires config.php in the same directory as cp2google.php in the following form
 
 	<?php
 
-	define( 'BACKUP_FOLDER', 'eas_db_backups_monthly' );
-	define( 'SHARE_WITH_GOOGLE_EMAIL', 'intatexit@gmail.com' );
-	define( 'CLIENT_ID', '10958614625-nod57ovmj13j8il1k0gcm47oc50n5spo.apps.googleusercontent.com' );
-	define( 'SERVICE_ACCOUNT_NAME', '10958614625-nod57ovmj13j8il1k0gcm47oc50n5spo@developer.gserviceaccount.com' );
-	define( 'KEY_PATH', '../google-drive-key/a84dd7cec5923f44f3d8bec5f1d99730027e940a-privatekey.p12');
+	define( 'BACKUP_FOLDER', '' );
+	define( 'SHARE_WITH_GOOGLE_EMAIL', '' );
+	define( 'CLIENT_ID', '' );
+	define( 'SERVICE_ACCOUNT_NAME', '' );
+	define( 'KEY_PATH', '');
 
-BACKUP_FOLDER – name of shared folder. The script will create it at the first run.
+BACKUP_FOLDER – path to top level backup folder. Will be created if doesn't exist
 SHARE_WITH_GOOGLE_EMAIL – your google account.
 CLIENT_ID – your project’s client id
 SERVICE_ACCOUNT_NAME – your project’s account name. It’s called e-mail address on the console page.
