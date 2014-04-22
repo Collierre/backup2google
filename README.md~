@@ -1,5 +1,5 @@
 Google Drive DB backup
-======================
+=========
 
 Command line utility to do periodic (e.g. daily / weekly / monthly) mysql database backups, and to clone these to a Google Drive account (http://systemsarchitect.net/automated-backups-to-google-drive-with-php-api/)
 
@@ -8,7 +8,6 @@ Google drive part forked from from https://github.com/lukaszkujawa/cp2google (ht
 Syntax:
 ======
 
-    $ ./db_drive_backup.sh period backupsnum
 	$ php addfile.php /path/to/file
 	$ php deletefile.php /path/to/file
 

@@ -1,11 +1,6 @@
 <?php
 
-define( 'BACKUP_FOLDER', 'PHPBackups' );
-define( 'SHARE_WITH_GOOGLE_EMAIL', 'my-email@gmail.com' );
-
-define( 'CLIENT_ID',  '701692987479.apps.googleusercontent.com' );
-define( 'SERVICE_ACCOUNT_NAME', '230692987478@developer.gserviceaccount.com' );
-define( 'KEY_PATH', '../866a3f5841d096604c6d4ac50ced5847b921f811-privatekey.p12');
+require_once 'config.php';
 
 require_once 'google-api-php-client/src/Google_Client.php';
 require_once 'google-api-php-client/src/contrib/Google_DriveService.php';
@@ -60,8 +55,8 @@ class DriveServiceHelper {
 	}
 	
 	
-	public function createFolder( $name ) {
-		return $this->createFile( $name, 'application/vnd.google-apps.folder', null, null);
+	public function createFolder( $name, Google_ParentReference $folderParent = null ) {
+		return $this->createFile( $name, 'application/vnd.google-apps.folder', null, null, $folderParent);
 	}
 	
 	public function setPermissions( $fileId, $value, $role = 'writer', $type = 'user' ) {
@@ -83,33 +78,16 @@ class DriveServiceHelper {
 		
 		return false;
 	}
-	
+
+    public function deleteFile( $id ) {
+        $this->_service->files->delete( $id );
+    }
+    
+    public function deleteAllFiles() {
+        $files = $this->_service->files->listFiles();
+        foreach ($files['items'] as $item ) {
+            $this->_service->files->delete($item['id']);
+        }
+    }
+
 }
-
-if( $_SERVER['argc'] != 2 ) {
-	echo "ERROR: no file selected\n";
-	die();
-}
-
-$path = $_SERVER['argv'][1];
-
-printf( "Uploading %s to Google Drive\n", $path );
-
-$service = new DriveServiceHelper( CLIENT_ID, SERVICE_ACCOUNT_NAME, KEY_PATH );
-
-$folderId = $service->getFileIdByName( BACKUP_FOLDER );
-
-if( ! $folderId ) {
-	echo "Creating folder...\n";
-	$folderId = $service->createFolder( BACKUP_FOLDER );
-	$service->setPermissions( $folderId, SHARE_WITH_GOOGLE_EMAIL );
-}
-
-$fileParent = new Google_ParentReference();
-$fileParent->setId( $folderId );
-
-$fileId = $service->createFileFromPath( $path, $path, $fileParent );
-
-printf( "File: %s created\n", $fileId );
-
-$service->setPermissions( $fileId, SHARE_WITH_GOOGLE_EMAIL );
