@@ -1,6 +1,6 @@
 <?php
 
-require_once 'cp2google.php';
+require_once 'backup2google.php';
 
 $fileToDelete = $_SERVER['argv'][1];
 

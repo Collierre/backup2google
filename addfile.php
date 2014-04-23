@@ -1,6 +1,6 @@
 <?php
 
-require("cp2google.php");
+require("backup2google.php");
 
 if( $_SERVER['argc'] < 2 ) {
 	echo "ERROR: no file selected\n";
@@ -14,11 +14,11 @@ printf( "Uploading %s to Google Drive\n", $path );
 
 $service = new DriveServiceHelper( CLIENT_ID, SERVICE_ACCOUNT_NAME, KEY_PATH );
 
-$folderId = $service->getFileIdByName( BACKUP_FOLDER );
+$folderId = $service->getFileIdByName( BACKUP_ID . "_db_backups" );
 
 if( ! $folderId ) {
 	echo "Creating main folder on Google Drive...\n";
-	$folderId = $service->createFolder( BACKUP_FOLDER );
+	$folderId = $service->createFolder( BACKUP_ID . "_db_backups" );
 	$service->setPermissions( $folderId, SHARE_WITH_GOOGLE_EMAIL );
 }
 

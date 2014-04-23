@@ -9,13 +9,11 @@ fi
 frequency=$1
 backupstokeep=$2
 
-# Specify the temporary backup directory.
-bkupdir="zpd_db_backups/$frequency"
+# Include database details
+. config.sh
 
-# Specify Database Name
-dbname="zpddev_db"
-dbuser="zpddev_db"
-dbpass="9KGrXwqU2g1Z"
+# Specify the temporary backup directory.
+bkupdir=$bkupdirid\_db_backups/$frequency
 
 # Save the current date
 date=`date '+%Y-%m-%d-%s'`
@@ -30,13 +28,13 @@ fi
 # path in the below command.
 
 echo "Dumping database $dbname to $bkupdir/$date_$frequency_$dbname.sql.gz"
-mysqldump -u $dbuser -p$dbpass $dbname region\
+mysqldump -u $dbuser -p$dbpass $dbname \
  | gzip > $bkupdir/$date\_$frequency\_$dbname.sql.gz
 
 
 # Upload the new file to google drive
 
-php cp2google/addfile.php $bkupdir/$date\_$frequency\_$dbname.sql.gz $frequency
+php addfile.php $bkupdir/$date\_$frequency\_$dbname.sql.gz $frequency
 
 # If the maximum number of backups for this backup period type has been reached, remove the oldest one. then remove it from google drive.
 
@@ -45,7 +43,7 @@ while [ $numbackups -gt $backupstokeep ]; do
     filetodelete=$(ls -1 $bkupdir | head -n1)
     echo "Deleting $filetodelete from filesystem"
     rm $bkupdir/$filetodelete
-    php cp2google/deletefile.php $filetodelete
+    php deletefile.php $filetodelete
     numbackups=$(ls -1 $bkupdir | wc -l)
 done
 

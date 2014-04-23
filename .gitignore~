@@ -1,4 +1,5 @@
 .DS_Store
 config.php
 *.p12
-zpd_db_backups
+*_db_backups
+*~
