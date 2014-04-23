@@ -16,7 +16,7 @@ backupstokeep=$2
 bkupdir=$bkupdirid\_db_backups/$frequency
 
 # Save the current date
-date=`date '+%Y-%m-%d-%s'`
+date=`date '+%Y-%m-%d'`
 
 # Create backupdir if it doesn't exist
 if [ ! -d "$bkupdir" ]; then
