@@ -23,8 +23,6 @@ Installation:
 * Download the files
 * Make a config.sh in the following form:
 
-    # DB details
-
     dbname=""
     dbuser=""
     dbpass=""

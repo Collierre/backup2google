@@ -5,7 +5,7 @@ Command line utility to do periodic (e.g. daily / weekly / monthly) mysql databa
 
 Google drive part forked from from https://github.com/lukaszkujawa/cp2google (http://systemsarchitect.net/automated-backups-to-google-drive-with-php-api/)
 
-Syntax:
+Usage:
 ======
 
     $ ./db_drive_backup.sh period backupsnum

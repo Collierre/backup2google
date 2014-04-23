@@ -1,3 +1,5 @@
+#!/usr/bin/env php
+
 <?php
 
 require_once 'backup2google.php';

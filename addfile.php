@@ -1,3 +1,5 @@
+#!/usr/bin/env php
+
 <?php
 
 require("backup2google.php");
@@ -14,18 +16,18 @@ printf( "Uploading %s to Google Drive\n", $path );
 
 $service = new DriveServiceHelper( CLIENT_ID, SERVICE_ACCOUNT_NAME, KEY_PATH );
 
-$folderId = $service->getFileIdByName( BACKUP_ID . "_db_backups" );
+$topFolderId = $service->getFileIdByName( BACKUP_ID . "_db_backups" );
 
-if( ! $folderId ) {
+if( ! $topFolderId ) {
 	echo "Creating main folder on Google Drive...\n";
-	$folderId = $service->createFolder( BACKUP_ID . "_db_backups" );
-	$service->setPermissions( $folderId, SHARE_WITH_GOOGLE_EMAIL );
+	$topFolderId = $service->createFolder( BACKUP_ID . "_db_backups" );
+	$service->setPermissions( $topFolderId, SHARE_WITH_GOOGLE_EMAIL );
 }
 
 $topParent = new Google_ParentReference();
-$topParent->setId( $folderId );
+$topParent->setId( $topFolderId );
 
-$frequencyFolderId = $service->getFileIdByName( $frequency );
+$frequencyFolderId = $service->getFileIdByName( $frequency, $topFolderId );
 
 if( ! $frequencyFolderId ) {
     echo "Creating frequency folder on Google Drive...\n";

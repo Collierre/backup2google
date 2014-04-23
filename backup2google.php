@@ -68,10 +68,11 @@ class DriveServiceHelper {
 		$this->_service->permissions->insert($fileId, $perm);
 	}
 	
-	public function getFileIdByName( $name ) {
+	public function getFileIdByName( $name, $parentId = null ) {
 		$files = $this->_service->files->listFiles();
 		foreach( $files['items'] as $item ) {
-			if( $item['title'] == $name ) {
+			if( $item['title'] == $name && ($parentId == null || $parentId == $item['parents'][0]['id'] ) {
+                var_dump( $item );
 				return $item['id'];
 			}
 		}
