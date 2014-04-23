@@ -23,18 +23,19 @@ Installation:
 * Download the files
 * Make a config.sh in the following form:
 
-    dbname=""
+    ```dbname=""
     dbuser=""
     dbpass=""
 
-    bkupdirid="" # ID for your backups directory. E.g. if you give it the id `mysite` the folder will be named `mysite_db_backups`
+    bkupdirid="" # ID for your backups directory. E.g. if you give it the id mysite the folder will be named mysite_db_backups```
 
 * Make a config.php in the following form:
 
-	<?php
+	```<?php
 
 	define( 'BACKUP_ID', '' ); // ID for top level backup folder. Will be created if doesn't exist, and `_db_backups` will be appended to the ID
 	define( 'SHARE_WITH_GOOGLE_EMAIL', '' ); // Your google account.
 	define( 'CLIENT_ID', '' ); // Your project’s client id
 	define( 'SERVICE_ACCOUNT_NAME', '' ); //  Your project’s account name. It’s called e-mail address on the console page.
 	define( 'KEY_PATH', ''); // Path to the downloaded private key.
+    ```
