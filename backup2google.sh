@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd backup2google
+
 if [ $# -lt 2 ]; then
     echo "Two arguments required: frequency type (e.g. daily), and number of backups to keep for this frequency (e.g. 7 for daily backups)"
     echo "e.g. ./mysqlbkup.sh weekly 4"
@@ -10,7 +12,7 @@ frequency=$1
 backupstokeep=$2
 
 # Include database details
-. config.sh
+. ./config.sh
 
 # Specify the temporary backup directory.
 bkupdir=$bkupdirid\_db_backups/$frequency
@@ -27,7 +29,7 @@ fi
 # Save the mysql password in a file and specify the password file
 # path in the below command.
 
-echo "Dumping database $dbname to $bkupdir/$date_$frequency_$dbname.sql.gz"
+echo "Dumping database $dbname to $bkupdir/$date\_$frequency\_$dbname.sql.gz"
 mysqldump -u $dbuser -p$dbpass $dbname \
  | gzip > $bkupdir/$date\_$frequency\_$dbname.sql.gz
 
