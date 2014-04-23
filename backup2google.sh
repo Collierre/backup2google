@@ -29,7 +29,7 @@ fi
 # Save the mysql password in a file and specify the password file
 # path in the below command.
 
-echo "Dumping database $dbname to $bkupdir/$date\_$frequency\_$dbname.sql.gz"
+echo "Dumping database $dbname to $bkupdir/${date}_${frequency}_${dbname}.sql.gz"
 mysqldump -u $dbuser -p$dbpass $dbname \
  | gzip > $bkupdir/$date\_$frequency\_$dbname.sql.gz
 
