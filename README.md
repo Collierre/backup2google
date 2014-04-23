@@ -5,7 +5,7 @@ Command line utility to do periodic (e.g. daily / weekly / monthly) mysql databa
 
 Google drive part forked from from https://github.com/lukaszkujawa/cp2google (http://systemsarchitect.net/automated-backups-to-google-drive-with-php-api/)
 
-Syntax:
+Usage:
 ======
 
     $ ./db_drive_backup.sh period backupsnum
@@ -17,18 +17,26 @@ Requirements:
 
 * PHP CURL extension
 
-Requires config.php in the same directory as cp2google.php in the following form:
+Installation:
+=============
+
+* Download the files
+* Make a config.sh in the following form:
+
+    # DB details
+
+    dbname=""
+    dbuser=""
+    dbpass=""
+
+    bkupdirid="" # ID for your backups directory. E.g. if you give it the id `mysite` the folder will be named `mysite_db_backups`
+
+* Make a config.php in the following form:
 
 	<?php
 
-	define( 'BACKUP_FOLDER', '' );
-	define( 'SHARE_WITH_GOOGLE_EMAIL', '' );
-	define( 'CLIENT_ID', '' );
-	define( 'SERVICE_ACCOUNT_NAME', '' );
-	define( 'KEY_PATH', '');
-
-BACKUP_FOLDER – path to top level backup folder. Will be created if doesn't exist
-SHARE_WITH_GOOGLE_EMAIL – your google account.
-CLIENT_ID – your project’s client id
-SERVICE_ACCOUNT_NAME – your project’s account name. It’s called e-mail address on the console page.
-KEY_PATH – path to the downloaded private key.
+	define( 'BACKUP_ID', '' ); // ID for top level backup folder. Will be created if doesn't exist, and `_db_backups` will be appended to the ID
+	define( 'SHARE_WITH_GOOGLE_EMAIL', '' ); // Your google account.
+	define( 'CLIENT_ID', '' ); // Your project’s client id
+	define( 'SERVICE_ACCOUNT_NAME', '' ); //  Your project’s account name. It’s called e-mail address on the console page.
+	define( 'KEY_PATH', ''); // Path to the downloaded private key.
